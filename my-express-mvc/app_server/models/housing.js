@@ -1,30 +1,30 @@
 const mongoose = require("mongoose");
 
 const housingSchema = new mongoose.Schema({
-    id: {
-        type: Number, 
+    idhousing: {
+        type: Number,
         required: true
-    }, 
+    },
     name: {
         type: String,
         required: true
-    }, 
+    },
     city: {
         type: String,
         required: true
-    }, 
+    },
     state: {
-        type: String, 
+        type: String,
         required: true
-    }, 
+    },
     photo: {
         type: String,
         required: true
-    }, 
+    },
     availableUnits: {
         type: Number,
         required: true
-    }, 
+    },
     wifi: {
         type: Boolean,
         required: true
@@ -32,8 +32,8 @@ const housingSchema = new mongoose.Schema({
     laundry: {
         type: Boolean,
         required: true
-    },
+    }
 });
 
-const Housing = mongoose.model('Hosuing', housingSchema);
-module.exports = Housing;
+const Housing = mongoose.model('Housing', housingSchema);
+module.exports = Housing;

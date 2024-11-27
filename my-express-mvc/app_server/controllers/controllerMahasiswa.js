@@ -32,7 +32,6 @@ const insert = (req, res, next) => {
       tanggal_lahir: req.body.tanggal_lahir,
       aktif: true
     });
-  
     mhs
       .save()
       .then((result) => {
@@ -132,4 +131,7 @@ const destroy = (req, res, next) => {
             res.status(404).json(responseMessage);
         });
 };
-module.exports = { Index, insert, update, show, destroy }
+
+module.exports = {
+    Index, insert, update, show, destroy
+}

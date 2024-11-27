@@ -12,4 +12,4 @@ const Index = async (req,res) => {
     }
 }
 
-module.exports = { Index }
+module.exports = { Index }
