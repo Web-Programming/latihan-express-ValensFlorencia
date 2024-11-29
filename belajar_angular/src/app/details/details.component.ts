@@ -48,10 +48,12 @@ export class DetailsComponent {
   housingLocation: HousingLocation | undefined
   applyForm: FormGroup = new FormGroup({
     firstName: new FormControl(''),
-    lastName: new FormControl('')
+    lastName: new FormControl(''),
+    email: new FormControl('')
+
   })
   readonly baseUrl = 'https://angular.io/assets/images/tutorials/faa';
-  
+
 
   constructor(){
     this.housingLocationId = Number(this.route.snapshot.params['id']);
@@ -61,16 +63,24 @@ export class DetailsComponent {
     console.table(this.housingLocation)
   }
 
-  submitApplyForm(){
-    //alert("Hallo you submit a form");
-    //alert("Hallo : " + this.applyForm.value.firstName 
-    //  + " " + this.applyForm.value.lastName)
-
-    //panggil API simpan data registarsi via service
-    this.housingService.submitApplication(
-      this.applyForm.value.firstName??'',
-      this.applyForm.value.lastName??'',
-      this.applyForm.value.email??'',
-    )
+  submitApplyForm() {
+    if (this.applyForm.valid) {
+      this.housingService
+        .submitApplication(
+          this.applyForm.value.firstName ?? '',
+          this.applyForm.value.lastName ?? '',
+          this.applyForm.value.email ?? ''
+        )
+        .then(() => {
+          alert('Application submitted successfully!');
+          this.applyForm.reset();
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          alert(`Failed to submit application: ${error.message}`);
+        });
+    } else {
+      alert('Please fill in all fields.');
+    }
   }
 }
