@@ -18,7 +18,36 @@ export class HousingService {
     return await data.json() ??[];
   }
 
-  submitApplication(firstName :String, lastName : String, email : String){
-    console.log(firstName, lastName, email)
+  submitApplication(firstName: String, lastName: String, email: String) {
+    const apiUrl = "http://localhost:3000/register";
+
+    const applicationData = {
+        firstname: firstName, 
+        lastname: lastName,  
+        email: email,
+    };
+
+    return fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(applicationData),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                return response.json().then((error) => {
+                    throw new Error(error.message || 'Failed to submit application');
+                });
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log('Application submitted successfully:', data);
+        })
+        .catch((error) => {
+            console.error('Error submitting application:', error);
+            throw error;
+        });
   }
 }

@@ -50,10 +50,10 @@ export class DetailsComponent {
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     email: new FormControl('')
-
+  
   })
   readonly baseUrl = 'https://angular.io/assets/images/tutorials/faa';
-
+  
 
   constructor(){
     this.housingLocationId = Number(this.route.snapshot.params['id']);
